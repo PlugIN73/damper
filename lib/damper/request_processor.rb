@@ -9,11 +9,11 @@ module Damper
     end
 
     def start
-      client = Damper::Backend.redis(channel: @channel)
+      client = Damper::Backend.redis
       describe_start
       Reel::Server.run(@host, @port) do |connection|
         connection.each_request do |request|
-          client.save prepare_data(request)
+          client.publish @channel, prepare_data(request)
           request.respond :ok, "message recieved"
         end
       end
