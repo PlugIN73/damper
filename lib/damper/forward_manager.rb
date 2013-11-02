@@ -15,8 +15,9 @@ module Damper
 
       client.subscribe(@channel) do |on|
         on.message do |channel, msg|
-          data = JSON.parse(msg)
-          puts "##{channel} - [#{data['forward_to']}]: #{data['method']}"
+          #data = JSON.parse(msg)
+          worker = ForwardWorker.new
+          worker.perform(msg)
         end
       end
 
