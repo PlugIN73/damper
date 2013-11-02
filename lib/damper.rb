@@ -5,6 +5,4 @@ require "damper/adapter/redis"
 require 'reel'
 
 module Damper
-  d = Damper::RequestProcessor.new
-  d.start
 end
