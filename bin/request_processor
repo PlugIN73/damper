@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 require 'bundler/setup'
 Bundler.require
-
-Damper::RequestProcessor.start
+request_processor = Damper::RequestProcessor.new namespace: 'test', forward_to: 'sex.com'
+request_processor.start
