@@ -13,11 +13,11 @@ module Damper
       client = Damper::Backend.redis
       describe_start
 
+      pool = Damper::ForwardWorker.pool(size: 2)
       client.subscribe(@channel) do |on|
         on.message do |channel, msg|
           #data = JSON.parse(msg)
-          worker = Damper::ForwardWorker.new
-          worker.perform(msg)
+          pool.perform(msg)
         end
       end
 

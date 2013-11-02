@@ -4,7 +4,7 @@ module Damper
     include Celluloid
 
     def perform(options)
-      puts options
+      puts self.inspect
     end
   end
 end
