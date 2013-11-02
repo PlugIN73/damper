@@ -4,12 +4,12 @@ module Damper
   module Adapter
     class Redis
       def initialize(options)
-        @connection = ::Redis.new
-        @namespace = options[:namespace]
+        @connection = ::Redis.new(:timeout => 0)
+        @channel = options[:channel]
       end
 
       def save(object)
-        @connection.lpush(@namespace, object)
+        @connection.publish @channel, object
       end
     end
   end

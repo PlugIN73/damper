@@ -3,6 +3,7 @@ require "damper/request_processor"
 require "damper/backend"
 require "damper/adapter/redis"
 require "reel"
+require "json"
 
 module Damper
   DEFAULT_HOST = "127.0.0.1"
