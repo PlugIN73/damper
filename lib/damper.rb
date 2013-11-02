@@ -1,5 +1,8 @@
 require "damper/version"
+require "damper/request_processor"
+require 'reel'
 
 module Damper
-  # Your code goes here...
+  d = Damper::RequestProcessor.new
+  d.start
 end

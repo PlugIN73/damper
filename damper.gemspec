@@ -6,8 +6,8 @@ require 'damper/version'
 Gem::Specification.new do |spec|
   spec.name          = "damper"
   spec.version       = Damper::VERSION
-  spec.authors       = ["Artem Petrov"]
-  spec.email         = ["partos0511@gmail.com"]
+  spec.authors       = ["Artem Petrov", "Vagin Alexander"]
+  spec.email         = ["partos0511@gmail.com", "laplugin73@gmail.com"]
   spec.description   = %q{TODO: Write a gem description}
   spec.summary       = %q{TODO: Write a gem summary}
   spec.homepage      = ""
@@ -18,6 +18,8 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.4"
+  spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "minitest", "~> 5"
+  spec.add_runtime_dependency "reel", "0.4.0"
 end
