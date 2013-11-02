@@ -12,8 +12,8 @@ module Damper
         @connection.publish channel, object
       end
 
-      def subscribe(channel)
-        @connection.subscribe channel
+      def subscribe(channel, &block)
+        @connection.subscribe channel, &block
       end
 
     end
