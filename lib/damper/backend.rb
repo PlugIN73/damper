@@ -1,8 +1,7 @@
 module Damper
   class Backend
     def self.redis(options=nil)
-      client = Adapter::Redis.new(options)
-      client.connection
+      Adapter::Redis.new(options)
     end
   end
 end
