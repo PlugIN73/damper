@@ -21,6 +21,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "minitest", "~> 5"
+  spec.add_development_dependency "webmock", "~> 1.15.2"
+  spec.add_development_dependency "wrong", "~> 0.7.0"
 
   spec.add_runtime_dependency "reel", "0.4.0"
   spec.add_runtime_dependency "redis", "3.0.5"
