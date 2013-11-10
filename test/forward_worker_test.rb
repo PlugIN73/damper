@@ -19,8 +19,8 @@ class ForwardWorkerTest < Minitest::Test
       with(:headers => {'Accept'=>'*/*', 'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3', 'Host'=>'127.0.0.1', 'User-Agent'=>'httperf/0.9.0'}).
       to_return(:status => 200, :body => "", :headers => {})
 
-    Damper::ForwardWorker.pool.perform(@request_options.to_json)
+    response = Damper::ForwardWorker.pool.perform(@request_options.to_json)
 
-    assert {true == true}
+    assert {response.code == "200"}
   end
 end
