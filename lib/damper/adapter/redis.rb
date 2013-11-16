@@ -8,12 +8,12 @@ module Damper
         @connection = ::Redis.new(:timeout => 0)
       end
 
-      def publish(channel, object)
-        @connection.publish channel, object
+      def publish(namespace, object)
+        @connection.lpush namespace, object
       end
 
-      def subscribe(channel, &block)
-        @connection.subscribe channel, &block
+      def get(namespace)
+        @connection.rpop namespace
       end
 
     end

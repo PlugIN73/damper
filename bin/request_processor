@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
 require 'bundler/setup'
 Bundler.require
-request_processor = Damper::RequestProcessor.new channel: 'test', forward_to: "http://localhost:3000/"
+request_processor = Damper::RequestProcessor.new namespace: 'test', forward_to: "http://localhost:3000/"
 request_processor.start

@@ -2,7 +2,7 @@ module Damper
   class RequestProcessor
 
     def initialize(options)
-      @channel = options.delete(:channel)
+      @namespace = options.delete(:namespace)
       @host = options.delete(:host) || Damper::DEFAULT_HOST
       @port = options.delete(:port) || Damper::DEFAULT_PORT
       @forward_to = options.delete(:forward_to)
@@ -13,7 +13,7 @@ module Damper
       describe_start
       Reel::Server.run(@host, @port) do |connection|
         connection.each_request do |request|
-          client.publish @channel, prepare_data(request)
+          client.publish @namespace, prepare_data(request)
           request.respond :ok, "message recieved"
         end
       end
