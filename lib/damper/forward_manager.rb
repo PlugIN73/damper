@@ -7,14 +7,15 @@ module Damper
 
     def initialize(options)
       @channel = options.delete(:channel)
+      @client = Damper::Backend.redis
     end
 
     def start
-      client = Damper::Backend.redis
       describe_start
 
       pool = Damper::ForwardWorker.pool(size: 2)
-      client.subscribe(@channel) do |on|
+      #FIXME Теперь нет pub/sub. Используем очереди.
+      @client.subscribe(@channel) do |on|
         on.message do |channel, msg|
           #data = JSON.parse(msg)
           pool.perform(msg)
