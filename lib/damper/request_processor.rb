@@ -5,7 +5,7 @@ module Damper
       @namespace = options.delete(:namespace)
       @host = options.delete(:host) || Damper::DEFAULT_HOST
       @port = options.delete(:port) || Damper::DEFAULT_PORT
-      @forward_to = options.delete(:forward_to)
+      @callback_url = options.delete(:callback_url)
     end
 
     def start
@@ -21,11 +21,11 @@ module Damper
 
     def prepare_data(request)
       {
-          method: request.method.downcase,
-          request_uri: request.path,
-          headers: request.headers,
-          body: request.body.to_s,
-          forward_to: @forward_to
+        method: request.method.downcase,
+        request_uri: request.path,
+        headers: request.headers,
+        code: request.body.to_s,
+        callback_url: @callback_url
       }.to_json
     end
 
