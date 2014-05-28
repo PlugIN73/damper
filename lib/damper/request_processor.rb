@@ -1,3 +1,5 @@
+require 'cgi'
+
 module Damper
   class RequestProcessor
 
@@ -21,10 +23,8 @@ module Damper
 
     def prepare_data(request)
       {
-        method: request.method.downcase,
-        request_uri: request.path,
-        headers: request.headers,
-        code: request.body.to_s,
+        code: CGI::parse(request.body.to_s)["code"].to_s,
+        run: true,
         callback_url: @callback_url
       }.to_json
     end
