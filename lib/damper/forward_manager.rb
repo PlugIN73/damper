@@ -14,13 +14,8 @@ module Damper
       describe_start
 
       pool = Damper::ForwardWorker.pool(size: 2)
-      #FIXME Теперь нет pub/sub. Используем очереди.
-      @client.subscribe(@channel) do |on|
-        on.message do |channel, msg|
-          #data = JSON.parse(msg)
-          pool.perform(msg)
-        end
-      end
+      queue, result = @client.get(@channel)
+      pool.perform(result)
 
     end
 

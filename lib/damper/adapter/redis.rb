@@ -13,7 +13,7 @@ module Damper
       end
 
       def get(namespace)
-        @connection.rpop namespace
+        @connection.brpop namespace
       end
 
     end
