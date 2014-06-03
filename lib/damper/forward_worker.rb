@@ -6,13 +6,12 @@ module Damper
     include Celluloid
 
     def perform(options)
-      #data = JSON.parse(options)
-      uri = URI.parse("http://0.0.0.0:3000/callback_url")
+      uri = URI.parse(options["callback_url"])
       http = Net::HTTP.new(uri.host, uri.port)
 
       request = Net::HTTP::Post.new(uri.path)
+      request.set_form_data(options)
       response = http.request(request)
-      puts response
     end
   end
 end

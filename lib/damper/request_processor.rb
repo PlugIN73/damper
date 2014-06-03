@@ -20,6 +20,11 @@ module Damper
 
     def serve (request)
       client = Damper::Backend.redis
+      if (request.path == "/callback_url" || request.path == "/callback_url/")
+        puts request.body.to_s.inspect
+        client.publish "recieved-result", request.body.to_s
+        request.respond :ok, "callback recieved"
+      end
       if (request.path == "/")
         if (CGI::parse(request.body.to_s)["callback_url"].first)
 

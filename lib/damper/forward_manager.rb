@@ -12,10 +12,11 @@ module Damper
 
     def start
       describe_start
-
-      pool = Damper::ForwardWorker.pool(size: 2)
-      queue, result = @client.get(@channel)
-      pool.perform(result)
+      pool = Damper::ForwardWorker.pool(size: 5)
+      while true do
+        queue, result = @client.get(@channel)
+        pool.perform(JSON.parse(result))
+      end
 
     end
 
