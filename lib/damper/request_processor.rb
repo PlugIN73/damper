@@ -21,14 +21,13 @@ module Damper
     def serve (request)
       client = Damper::Backend.redis
       if (request.path == "/callback_url" || request.path == "/callback_url/")
-        puts request.body.to_s.inspect
         client.publish "recieved-result", request.body.to_s
         request.respond :ok, "callback recieved"
       end
       if (request.path == "/")
-        if (CGI::parse(request.body.to_s)["callback_url"].first)
+        if (JSON.parse(request.body.to_s)["callback_url"])
 
-          if (check_lang CGI::parse(request.body.to_s)["lang"].first, CGI::parse(request.body.to_s)["version"].first)
+          if (check_lang JSON.parse(request.body.to_s)["lang"], JSON.parse(request.body.to_s)["version"])
             client.publish @namespace, prepare_data(request)
             request.respond :ok, "message recieved"
           else
@@ -54,11 +53,11 @@ module Damper
 
     def prepare_data(request)
       {
-        code: CGI::parse(request.body.to_s)["code"].first,
-        callback_url: CGI::parse(request.body.to_s)["callback_url"].first,
-        lang: CGI::parse(request.body.to_s)["lang"].first,
-        version: CGI::parse(request.body.to_s)["version"].first,
-        id: "#{CGI::parse(request.body.to_s)["lang"].first}-#{Time.now.to_i}",
+        code: JSON.parse(request.body.to_s)["code"],
+        callback_url: JSON.parse(request.body.to_s)["callback_url"],
+        lang: JSON.parse(request.body.to_s)["lang"],
+        version: JSON.parse(request.body.to_s)["version"],
+        id: "#{JSON.parse(request.body.to_s)["lang"]}-#{Time.now.to_i}",
         mode: "run",
       }.to_json
     end
