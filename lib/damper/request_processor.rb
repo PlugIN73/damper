@@ -27,7 +27,7 @@ module Damper
       if (request.path == "/")
         if (JSON.parse(request.body.to_s)["callback_url"])
 
-          if (check_lang JSON.parse(request.body.to_s)["lang"], JSON.parse(request.body.to_s)["version"])
+          if (check_lang JSON.parse(request.body.to_s)["lang"])
             client.publish @namespace, prepare_data(request)
             request.respond :ok, "message recieved"
           else
@@ -45,9 +45,9 @@ module Damper
 
     end
 
-    def check_lang lang, version
+    def check_lang lang
       Damper::SUPPORTED_LANGS.find { |language|
-        language[:name] == lang && language[:version] == version
+        language[:name] == lang
       }
     end
 
@@ -56,7 +56,6 @@ module Damper
         code: JSON.parse(request.body.to_s)["code"],
         callback_url: JSON.parse(request.body.to_s)["callback_url"],
         lang: JSON.parse(request.body.to_s)["lang"],
-        version: JSON.parse(request.body.to_s)["version"],
         id: "#{JSON.parse(request.body.to_s)["lang"]}-#{Time.now.to_i}",
         mode: "run",
       }.to_json

@@ -13,6 +13,5 @@ module Damper
       lexical: true,
       syntax: true
     }
-
   ]
 end
