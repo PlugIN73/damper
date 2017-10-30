@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Damper::VERSION
   spec.authors       = ["Artem Petrov", "Vagin Alexander"]
   spec.email         = ["partos0511@gmail.com", "laplugin73@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = "test"
+  spec.summary       = "test"
   spec.homepage      = ""
   spec.license       = "MIT"
 
